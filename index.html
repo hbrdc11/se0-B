@@ -1,95 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LoveSync</title>
     
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+
     <script>
       tailwind.config = {
-        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
               serif: ['Playfair Display', 'serif'],
               hand: ['Caveat', 'cursive'],
-            },
-            animation: {
-              'fade-in': 'fadeIn 0.5s ease-out',
-              'fade-in-up': 'fadeInUp 0.5s ease-out',
-            },
-            keyframes: {
-              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-              fadeInUp: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
             }
-          },
-        },
+          }
+        }
       }
     </script>
 
     <style>
-      html, body {
-        height: 100%; width: 100%; overflow: hidden; margin: 0; padding: 0;
-        overscroll-behavior: none; background-color: #f8fafc;
-      }
-      .scrollbar-hide::-webkit-scrollbar { display: none; }
-      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      body { margin: 0; background-color: #fff5f7; font-family: 'Inter', sans-serif; }
+      #root { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
     </style>
-
-    <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@19.0.0",
-        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-        "lucide-react": "https://esm.sh/lucide-react@0.460.0"
-      }
-    }
-    </script>
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root">Yükleniyor...</div>
 
-    <script type="module">
-        import React, { useState } from 'react';
-        import { createRoot } from 'react-dom/client';
-        import { Heart, Stars, Calendar } from 'lucide-react';
+    <script type="text/babel">
+      const { useState, useEffect } = React;
 
-        // Uygulama Ana Bileşeni
-        function App() {
-            return (
-                <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-rose-50 to-teal-50 text-center animate-fade-in">
-                    <div className="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-rose-100 max-w-md w-full">
-                        <div className="flex justify-center mb-6">
-                            <Heart className="text-rose-500 w-12 h-12 animate-pulse" />
-                        </div>
-                        <h1 className="text-4xl font-serif font-bold text-gray-800 mb-2">LoveSync</h1>
-                        <p className="font-hand text-2xl text-rose-400 mb-6">Aşkınızın Ritmini Yakalayın</p>
-                        
-                        <div className="space-y-4">
-                            <button className="w-full py-3 px-6 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-semibold transition-all transform hover:scale-105 shadow-md flex items-center justify-center gap-2">
-                                <Stars size={20} /> Hemen Başla
-                            </button>
-                            <button className="w-full py-3 px-6 bg-white border-2 border-rose-100 text-rose-500 hover:bg-rose-50 rounded-xl font-semibold transition-all flex items-center justify-center gap-2">
-                                <Calendar size={20} /> Geçmişi Gör
-                            </button>
-                        </div>
-                        
-                        <footer className="mt-8 text-gray-400 text-sm font-sans">
-                            AI Studio tarafından LoveSync için hazırlandı
-                        </footer>
-                    </div>
-                </div>
-            );
-        }
+      function App() {
+        useEffect(() => {
+          // İkonları canlandır
+          lucide.createIcons();
+        }, []);
 
-        // React'i Root içine basıyoruz
-        const container = document.getElementById('root');
-        const root = createRoot(container);
-        root.render(React.createElement(App));
+        return (
+          <div className="max-w-md w-full mx-auto p-6 text-center animate-fade-in">
+            <div className="bg-white rounded-3xl shadow-2xl p-8 border border-rose-100">
+              <div className="flex justify-center mb-4 text-rose-500">
+                <i data-lucide="heart" className="w-12 h-12 fill-current"></i>
+              </div>
+              
+              <h1 className="text-4xl font-serif font-bold text-gray-800 mb-2">LoveSync</h1>
+              <p className="font-hand text-2xl text-rose-400 mb-8">Aşkınızın Ritmini Yakalayın</p>
+              
+              <div className="space-y-4">
+                <button className="w-full py-4 bg-rose-500 text-white rounded-2xl font-bold shadow-lg hover:bg-rose-600 transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="sparkles" className="w-5 h-5"></i>
+                  Hemen Başla
+                </button>
+                
+                <button className="w-full py-4 bg-white border-2 border-rose-100 text-rose-500 rounded-2xl font-bold hover:bg-rose-50 transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="calendar" className="w-5 h-5"></i>
+                  Geçmişi Gör
+                </button>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-gray-100 text-gray-400 text-sm">
+                AI Studio & GitHub Pages
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // Render işlemi
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
     </script>
 </body>
 </html>
