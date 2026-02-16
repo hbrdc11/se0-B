@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>LoveSync</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -21,58 +23,73 @@
               'fade-in-up': 'fadeInUp 0.5s ease-out',
             },
             keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              },
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(10px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
+              fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+              fadeInUp: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
             }
           },
         },
       }
     </script>
-    <style>
-      /* Global Settings for App-Like Feel */
-      html, body {
-        height: 100%;
-        width: 100%;
-        overflow: hidden; /* Prevents the whole browser window from scrolling */
-        margin: 0;
-        padding: 0;
-        overscroll-behavior: none; /* Disables pull-to-refresh on mobile */
-        background-color: #f8fafc;
-      }
 
-      /* Hide scrollbar for Chrome, Safari and Opera */
-      .scrollbar-hide::-webkit-scrollbar {
-          display: none;
+    <style>
+      html, body {
+        height: 100%; width: 100%; overflow: hidden; margin: 0; padding: 0;
+        overscroll-behavior: none; background-color: #f8fafc;
       }
-      /* Hide scrollbar for IE, Edge and Firefox */
-      .scrollbar-hide {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-      }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
-    "firebase/app": "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js",
-    "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js",
-    "firebase/": "https://esm.sh/firebase@^12.9.0/"
-  }
-}
-</script>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@19.0.0",
+        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.460.0"
+      }
+    }
+    </script>
 </head>
-  <body>
+<body>
     <div id="root"></div>
-  </body>
+
+    <script type="module">
+        import React, { useState } from 'react';
+        import { createRoot } from 'react-dom/client';
+        import { Heart, Stars, Calendar } from 'lucide-react';
+
+        // Uygulama Ana Bileşeni
+        function App() {
+            return (
+                <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-rose-50 to-teal-50 text-center animate-fade-in">
+                    <div className="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-rose-100 max-w-md w-full">
+                        <div className="flex justify-center mb-6">
+                            <Heart className="text-rose-500 w-12 h-12 animate-pulse" />
+                        </div>
+                        <h1 className="text-4xl font-serif font-bold text-gray-800 mb-2">LoveSync</h1>
+                        <p className="font-hand text-2xl text-rose-400 mb-6">Aşkınızın Ritmini Yakalayın</p>
+                        
+                        <div className="space-y-4">
+                            <button className="w-full py-3 px-6 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-semibold transition-all transform hover:scale-105 shadow-md flex items-center justify-center gap-2">
+                                <Stars size={20} /> Hemen Başla
+                            </button>
+                            <button className="w-full py-3 px-6 bg-white border-2 border-rose-100 text-rose-500 hover:bg-rose-50 rounded-xl font-semibold transition-all flex items-center justify-center gap-2">
+                                <Calendar size={20} /> Geçmişi Gör
+                            </button>
+                        </div>
+                        
+                        <footer className="mt-8 text-gray-400 text-sm font-sans">
+                            AI Studio tarafından LoveSync için hazırlandı
+                        </footer>
+                    </div>
+                </div>
+            );
+        }
+
+        // React'i Root içine basıyoruz
+        const container = document.getElementById('root');
+        const root = createRoot(container);
+        root.render(React.createElement(App));
+    </script>
+</body>
 </html>
